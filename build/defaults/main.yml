@@ -1,2 +1,4 @@
 ---
-# defaults file for build
+app_versions: v1.0.0
+
+app_docker_file_path: ansible-blue-green/ansible-blue-green/apps/{{ app_version }}

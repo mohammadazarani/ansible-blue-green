@@ -1,2 +1,7 @@
 ---
-# tasks file for build
+- name: Build an image and push it to a docker hub
+  docker_image:
+    path: "{{ app_docker_file_path }}"
+    name: mabdollahzae/go-apps
+    tag: "{{ app_version }}"
+    # push: yes
