@@ -8,16 +8,20 @@
   
 - name: health check on new deployed docker_container
   uri: 
-    url: "{{ 'http://' + {{ host_ip }}:{{ new_app_port }}{{ app_healthcheck_path }} }}"
+    url: "{{ 'http://' + host_ip|string  + ':' + new_app_port|string + app_healthcheck_path  }}"
     method: GET
-    status_code: 200
+    status_code: 500
   retries: 10
-  delay: 5
+  delay: 50
   register: _app_healthcheck_result
-
-
+  ignore_errors: True
 
 - debug:
-  msg : {{ _app_healthcheck_result }}
+    msg : "{{ _app_healthcheck_result['status'] }}"
 
-    
+- name: change nginx conf file if status result is 200
+  template:
+    src: nginx.conf.j2
+    dest: 
+  
+  
