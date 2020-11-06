@@ -1,0 +1,7 @@
+---
+
+- name: installing nginx the easy way
+  package:
+    name: nginx
+    state: present
+  notify: restart_nginx
