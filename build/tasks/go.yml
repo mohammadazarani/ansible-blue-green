@@ -1,11 +1,7 @@
 ---
-- name: add go apt-repository
-  apt_repository:
-      repo : "ppa:longsleep/golang-backports"
-      state: present
-      update_cache: true
     
 - name: install go-lang
+  become: yes
   package:
     name: golang-go
     state: present
