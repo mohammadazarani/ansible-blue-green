@@ -15,3 +15,7 @@
 # check it is started and enabled
 
 - name: start and enabled
+  service:
+    name: docker
+    state: started
+    enabled: true
