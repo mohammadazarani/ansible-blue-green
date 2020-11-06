@@ -22,6 +22,7 @@
 - name: change nginx conf file if status result is 200
   template:
     src: nginx.conf.j2
-    dest: 
+    dest: "/etc/nginx/nginx.conf"
+  notify: reload_nginx
   
   
