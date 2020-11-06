@@ -1,6 +1,11 @@
 ---
 - name: All roles together
-  hosts: ubuntu
-  become: True
+  hosts: localhost
+#  become: True
   roles:
-    - docker
+#    - docker
+#     - build
+     - nginx
+     - blue-green
+     - blue-green-v2
+     - blue-green-v3
