@@ -1,5 +1,5 @@
 ---
-- name: restart_nginx
+- name: start_nginx
   service:
     name: nginx
     state: started #don't restart because it will change pid of nginx process
