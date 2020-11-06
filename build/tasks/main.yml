@@ -4,4 +4,4 @@
     path: "{{ app_docker_file_path }}"
     name: mabdollahzae/go-apps
     tag: "{{ app_version }}"
-    # push: yes
+    push: yes
