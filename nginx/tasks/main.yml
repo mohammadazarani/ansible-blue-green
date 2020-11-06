@@ -18,7 +18,7 @@
 
   # start and enable
 
-- name:
+- name: configure and running
   service:
     name: nginx
     state: started
