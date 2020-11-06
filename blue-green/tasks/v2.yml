@@ -10,7 +10,7 @@
   uri: 
     url: "{{ 'http://' + host_ip|string  + ':' + new_app_port|string + app_healthcheck_path  }}"
     method: GET
-    status_code: 500
+    status_code: 200
   retries: 10
   delay: 50
   register: _app_healthcheck_result
@@ -24,5 +24,4 @@
     src: nginx.conf.j2
     dest: "/etc/nginx/nginx.conf"
   notify: reload_nginx
-  
-  
+  when: "{{ _app_healthcheck_result['status'] }}  == 200"
