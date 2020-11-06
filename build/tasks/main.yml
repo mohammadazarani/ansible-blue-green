@@ -1,7 +1,51 @@
 ---
+
+# - name: Log into DockerHub
+#   docker_login:
+#     username: mabdollahzade
+#     password: ma3628243ma
+- include_tasks: go.yml
+  when: ansible_os_family == 'Debian'
+
+
 - name: Build an image and push it to a docker hub
   docker_image:
     path: "{{ app_docker_file_path }}"
     name: mabdollahzae/go-apps
     tag: "{{ app_version }}"
-    push: yes
+    # repository: "mabdollahzae/go-apps:{{ app_version }}"
+  delegate_to: localhost
+    # push: yes
+
+
+- name: Build an image and push it to a docker hub
+  docker_image:
+    path: apps/v2.0.0
+    name: mabdollahzae/go-apps
+    tag: "v2.0.0"
+    # repository: "mabdollahzae/go-apps:b"
+  delegate_to: localhost
+    # push: yes
+
+
+
+- name: Build an image and push it to a docker hub
+  docker_image:
+    path: "apps/v3.0.0"
+    name: mabdollahzae/go-apps
+    tag: "v3.0.0"
+    # repository: "mabdollahzae/go-apps:{{ app_version }}"
+  delegate_to: localhost
+    # push: yes
+
+
+- name: Build an image and push it to a docker hub
+  docker_image:
+    path: "apps/v4.0.0"
+    name: mabdollahzae/go-apps
+    tag: "v4.0.0"
+    # repository: "mabdollahzae/go-apps:{{ app_version }}"
+  delegate_to: localhost
+    # push: yes
+
+
