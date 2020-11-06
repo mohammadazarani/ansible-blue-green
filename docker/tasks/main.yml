@@ -2,3 +2,16 @@
 - include_tasks: ubuntu.yml
   when: ansible_os_family == 'Debian'
 
+
+
+# common setup for all distrus
+
+- name: installing docker
+  package: 
+    name: docker-ce
+    state: present
+  notify: restart_docker
+
+# check it is started and enabled
+
+- name: start and enabled
