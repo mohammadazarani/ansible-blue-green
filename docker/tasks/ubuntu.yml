@@ -9,3 +9,13 @@
       - docker
       - docker-engine
     state: absent
+
+- name: set Up repo
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+      - software-properties-common
+    state: present
