@@ -1,0 +1,9 @@
+
+---
+- name: run first version
+  docker_container:
+    name: go-v1
+    image: mabdollahzae/go-apps:v1.0.0
+    ports: "8080:3000"
+    state: started
+    

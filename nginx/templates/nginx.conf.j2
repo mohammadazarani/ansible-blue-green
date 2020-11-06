@@ -1,0 +1,18 @@
+events {}
+http{
+    upstream blueGreen {
+        server {{ host_ip }}:{{ app_port }};
+    }
+
+    server {
+        listen       80;
+        server_name  {{ host_ip }};
+
+        access_log /var/log/nginx/blueGreen.access.log;
+        error_log  /var/log/nginx/blueGreen.error.log;
+
+        location ~* / {
+            proxy_pass         http://blueGreen;
+        }
+    }
+}
