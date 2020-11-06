@@ -1,5 +1,6 @@
 ---
 - name: All roles together
   hosts: ubuntu
+  become: True
   roles:
     - docker
