@@ -1,0 +1,19 @@
+upstream blueGreen {
+    #we could add if,else for other types of balancing
+    ip_hash;
+
+    {% for p in _app_ports %}
+    server {{ p.HostIp }}:{{ p.HostPort }};
+    {% endfor %}
+
+server {
+    listen       80;
+    server_name  {{ app_nginx_hostnames | join(' ') }};
+
+    access_log /var/log/nginx/blueGreen.access.log;
+    error_log  /var/log/nginx/blueGreen.error.log;
+
+    location ~* / {
+        proxy_pass         http://blueGreen;
+    }
+}
