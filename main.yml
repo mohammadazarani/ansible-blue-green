@@ -1,5 +1,5 @@
 ---
-- name:All roles together
+- name: All roles together
   hosts: ubuntu
-  roles"
+  roles:
     - docker
