@@ -3,6 +3,7 @@
 - include_tasks: ubuntu.yml
   when: ansible_distribution == 'ubuntu'
 
+- include_tasks: v1.yml
 
   # -----Nginx comman taks----
 
