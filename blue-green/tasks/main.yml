@@ -1,2 +1,3 @@
 ---
-# tasks file for blue-green
+- include_tasks: v1.yml
+
