@@ -1,0 +1,262 @@
+[WARNING]: Ansible is being run in a world writable directory (/home/mohammad/ansible-blue-green), ignoring it as an ansible.cfg source. For more
+information see https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+ ___________________________
+< PLAY [All roles together] >
+ ---------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ ________________________
+< TASK [Gathering Facts] >
+ ------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [localhost]
+ ______________________________
+< TASK [nginx : include_tasks] >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+skipping: [localhost]
+ ______________________________
+< TASK [nginx : include_tasks] >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/mohammad/ansible-blue-green/nginx/tasks/v1.yml for localhost
+ __________________________________
+< TASK [nginx : run first version] >
+ ----------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [localhost]
+ _____________________________________
+< TASK [nginx : copy nginx conf file] >
+ -------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [localhost]
+ ______________________________________
+< TASK [nginx : configure and running] >
+ --------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [localhost]
+ ___________________________________
+< TASK [blue-green : include_tasks] >
+ -----------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/mohammad/ansible-blue-green/blue-green/tasks/v2.yml for localhost
+ ________________________________________
+< TASK [blue-green : run second version] >
+ ----------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [localhost]
+ _________________________________________________
+/ TASK [blue-green : health check on new deployed \
+\ docker_container]                               /
+ -------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [localhost]
+ ___________________________
+< TASK [blue-green : debug] >
+ ---------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [localhost] => {
+    "msg": "200"
+}
+ ____________________________________________________________
+/ TASK [blue-green : change nginx conf file if status result \
+\ is 200]                                                    /
+ ------------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+[WARNING]: conditional statements should not include jinja2 templating delimiters such as {{ }} or {% %}. Found: {{ _app_healthcheck_result['status']
+}}  == 200
+changed: [localhost]
+ ______________________________________
+< TASK [blue-green-v2 : include_tasks] >
+ --------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/mohammad/ansible-blue-green/blue-green-v2/tasks/v3.yml for localhost
+ ___________________________________________
+< TASK [blue-green-v2 : run second version] >
+ -------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [localhost]
+ ____________________________________________________
+/ TASK [blue-green-v2 : health check on new deployed \
+\ docker_container]                                  /
+ ----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+fatal: [localhost]: FAILED! => {"changed": false, "connection": "close", "content": "", "content_length": "0", "date": "Fri, 06 Nov 2020 13:20:42 GMT", "elapsed": 0, "msg": "Status code was 500 and not [200]: HTTP Error 500: Internal Server Error", "redirected": false, "status": 500, "url": "http://192.168.1.9:3002/healthz"}
+...ignoring
+ ______________________________
+< TASK [blue-green-v2 : debug] >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [localhost] => {
+    "msg": "500"
+}
+ ________________________________________________________
+/ TASK [blue-green-v2 : change nginx conf file if status \
+\ result is 200]                                         /
+ --------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+[WARNING]: conditional statements should not include jinja2 templating delimiters such as {{ }} or {% %}. Found: {{ _app_healthcheck_result['status']
+}} == 200
+skipping: [localhost]
+ ______________________________________
+< TASK [blue-green-v3 : include_tasks] >
+ --------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+included: /home/mohammad/ansible-blue-green/blue-green-v3/tasks/v4.yml for localhost
+ ___________________________________________
+< TASK [blue-green-v3 : run second version] >
+ -------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [localhost]
+ ____________________________________________________
+/ TASK [blue-green-v3 : health check on new deployed \
+\ docker_container]                                  /
+ ----------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+fatal: [localhost]: FAILED! => {"changed": false, "connection": "close", "content": "", "content_length": "0", "date": "Fri, 06 Nov 2020 13:20:45 GMT", "elapsed": 0, "msg": "Status code was 500 and not [200]: HTTP Error 500: Internal Server Error", "redirected": false, "status": 500, "url": "http://192.168.1.9:3003/healthz"}
+...ignoring
+ ______________________________
+< TASK [blue-green-v3 : debug] >
+ ------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+ok: [localhost] => {
+    "msg": "500"
+}
+ ________________________________________________________
+/ TASK [blue-green-v3 : change nginx conf file if status \
+\ result is 200]                                         /
+ --------------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+[WARNING]: conditional statements should not include jinja2 templating delimiters such as {{ }} or {% %}. Found: {{ _app_healthcheck_result['status']
+}} == 200
+skipping: [localhost]
+ ________________________________________________
+< RUNNING HANDLER [blue-green-v3 : reload_nginx] >
+ ------------------------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+changed: [localhost]
+ ____________
+< PLAY RECAP >
+ ------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+
+localhost                  : ok=19   changed=7    unreachable=0    failed=0    skipped=3    rescued=0    ignored=2   
+
