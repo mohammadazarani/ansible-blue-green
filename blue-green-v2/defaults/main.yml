@@ -1,0 +1,11 @@
+---
+# defaults file for blue-green
+
+app_nginx_hostnames:
+  - localhost
+
+
+host_ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+app_port: 3000
+new_app_port: 3002
+app_healthcheck_path: /healthz

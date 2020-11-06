@@ -1,0 +1,27 @@
+---
+- name: run second version
+  docker_container:
+    name: go-v4
+    image: mabdollahzae/go-apps:v4.0.0
+    ports: "{{ new_app_port }}:3000"
+    state: started
+  
+- name: health check on new deployed docker_container
+  uri: 
+    url: "{{ 'http://' + host_ip|string  + ':' + new_app_port|string + app_healthcheck_path  }}"
+    method: GET
+    status_code: 200
+  retries: 10
+  delay: 50
+  register: _app_healthcheck_result
+  ignore_errors: True
+
+- debug:
+    msg : "{{ _app_healthcheck_result['status'] }}"
+
+- name: change nginx conf file if status result is 200
+  template:
+    src: nginx.conf.j2
+    dest: "/etc/nginx/nginx.conf"
+  notify: reload_nginx
+  when: "{{ _app_healthcheck_result['status'] }} == 200"
